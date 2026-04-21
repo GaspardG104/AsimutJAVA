@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/fxml/1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guid.net.asimutjava.controllers.HomeController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <children>
+                <Label text="ASIMOV MANAGER" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets right="30.0" />
+                    </HBox.margin>
+                </Label>
+                <Button mnemonicParsing="false" onAction="#afficherAccueil" style="-fx-background-color: transparent;" text="Accueil" textFill="WHITE" />
+                <Button mnemonicParsing="false" onAction="#afficherProjets" style="-fx-background-color: transparent;" text="Gestion des Projets" textFill="WHITE" />
+                <Button mnemonicParsing="false" onAction="#afficherStages" style="-fx-background-color: transparent;" text="Gestion des Stages" textFill="WHITE" />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox fx:id="welcomeBlock" alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Bienvenue dans Asim'UT l'application Asimov">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <Label text="Sélectionnez une option dans le menu pour commencer" textFill="#7c7c7c" />
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
