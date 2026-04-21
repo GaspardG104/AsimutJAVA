@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="guid.net.asimutjava.controllers.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <Label text="Liste des Projets Asimov" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tableProjets" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="colId" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="colLibelle" prefWidth="150.0" text="Libellé" />
+            <TableColumn fx:id="colDescription" prefWidth="250.0" text="Description" />
+            <TableColumn fx:id="colResponsable" prefWidth="150.0" text="Responsable" />
+        </columns>
+    </TableView>
 </VBox>
