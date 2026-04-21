@@ -20,10 +20,9 @@ import java.util.List;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 
 
-public class MainController {
+public class ProjetController {
 
     @FXML private TableView<Projet> tableProjets;
     @FXML private TableColumn<Projet, Integer> colId;
