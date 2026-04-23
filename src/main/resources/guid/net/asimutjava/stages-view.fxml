@@ -20,8 +20,6 @@
             <TableColumn fx:id="colEntreprise" prefWidth="250.0" text="Entreprise" />
             <TableColumn fx:id="colIntensite" prefWidth="150.0" text="Intensité" />
             <TableColumn fx:id="colConvention" prefWidth="150.0" text="Convention" />
-            <TableColumn fx:id="colDatedebut" prefWidth="150.0" text="Date du début" />
-            <TableColumn fx:id="colDatefin" prefWidth="150.0" text="Date de fin" />
         </columns>
     </TableView>
 </VBox>
