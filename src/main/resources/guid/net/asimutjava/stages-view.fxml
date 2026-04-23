@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="guid.net.asimutjava.controllers.ProjetController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Liste des Projets Asimov" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tableProjets" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="colEleve" prefWidth="150.0" text="Nom de l'élève" />
+            <TableColumn fx:id="colEntreprise" prefWidth="250.0" text="Entreprise" />
+            <TableColumn fx:id="colIntensite" prefWidth="150.0" text="Intensité" />
+            <TableColumn fx:id="colConvention" prefWidth="150.0" text="Convention" />
+            <TableColumn fx:id="colDatedebut" prefWidth="150.0" text="Date du début" />
+            <TableColumn fx:id="colDatefin" prefWidth="150.0" text="Date de fin" />
+        </columns>
+    </TableView>
+</VBox>
