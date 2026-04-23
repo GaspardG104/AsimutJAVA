@@ -55,7 +55,7 @@ public class ProjetController {
     private void chargerDonnees() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/projets/api/json"))
+                .uri(URI.create("http://localhost:3000/projets/api/projets"))
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
