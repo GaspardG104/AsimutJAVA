@@ -41,11 +41,7 @@ public class ProjetController {
     @FXML private TableColumn<Projet, String> colResponsable;
     @FXML private TableColumn<Projet, String> colDatedebut;
     @FXML private TableColumn<Projet, String> colDatefin;
-    @FXML private TextField txtLibelle;
-    @FXML private TextArea txtDescription;
-    @FXML private DatePicker dpDateDebut;
-    @FXML private DatePicker dpDateFin;
-    @FXML private ComboBox<Eleves> nomEleves;
+    @FXML private Button btnModifier;
 
     @FXML
     public void initialize() {
@@ -62,6 +58,10 @@ public class ProjetController {
         });
         colDatedebut.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         colDatefin.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+        // btnModifier est le fx:id de ton bouton Modifier
+        btnModifier.disableProperty().bind(
+                tableProjets.getSelectionModel().selectedItemProperty().isNull()
+        );
 
 
         chargerDonnees();
@@ -137,21 +137,41 @@ public class ProjetController {
 
 
 
+// Dans ProjetController.java
+
     @FXML
-    private void openCreationWindow() {
+    private void openCreateWindow() {
+        // Cas CREATION : on ouvre sans rien passer, ou on force l'ID à -1
+        chargerFenetreFormulaire(null);
+    }
+
+    @FXML
+    private void openEditWindow() {
+        Projet selected = tableProjets.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            // Cas MODIFICATION : on passe le projet sélectionné
+            chargerFenetreFormulaire(selected);
+        }
+    }
+
+    private void chargerFenetreFormulaire(Projet projet) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/guid/net/asimutjava/projets-create.fxml"));
             Parent root = loader.load();
 
-            // On récupère le contrôleur de la fenêtre de création
             CreateProjetController controller = loader.getController();
-
-            // On lui donne la méthode chargerDonnees comme mission
             controller.setOnSaveSuccess(this::chargerDonnees);
+
+            if (projet != null) {
+                // Si on a un projet, on pré-remplit (Modification)
+                controller.dataLoadEdit(projet);
+            } else {
+                // Sinon, on s'assure d'être en mode création (ID = -1)
+                controller.prepareProjet();
+            }
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Nouveau Projet");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

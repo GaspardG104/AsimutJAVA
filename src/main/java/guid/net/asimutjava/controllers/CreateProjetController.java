@@ -36,6 +36,16 @@ public class CreateProjetController {
     }
 
     @FXML
+    public void prepareProjet() {
+        this.idProjetSelected = -1;
+        // On vide les champs au cas où
+        txtLibelle.clear();
+        txtDescription.clear();
+        dpDateDebut.setValue(null);
+        dpDateFin.setValue(null);
+    }
+
+    @FXML
     private void createProjet() {
         // 1. On crée l'objet à envoyer
         Projet nouveauProjet = new Projet();
@@ -55,12 +65,24 @@ public class CreateProjetController {
 
         String jsonBody = gson.toJson(nouveauProjet);
 
-        // 3. Envoi de la requête POST vers l'API
+        // On définit l'URL de base
+        String url = "http://localhost:3000/projets/api/projets";
+        String methode;
+
+        if (idProjetSelected  == -1) {
+            // Cas Création
+            methode = "POST";
+        } else {
+            // Cas Modification : on ajoute l'ID à l'URL
+            url += "/" + idProjetSelected ;
+            methode = "PUT";
+        }
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/projets/api/projets"))
+                .uri(URI.create(url))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                .method(methode, HttpRequest.BodyPublishers.ofString(jsonBody)) // Utilise .method pour être dynamique
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -118,5 +140,18 @@ public class CreateProjetController {
                         }
                     });
                 });
+    }
+    private int idProjetSelected = -1; // -1 signifie "Nouveau", sinon c'est l'ID du projet à modifier
+
+    public void dataLoadEdit(Projet projet) {
+        this.idProjetSelected = projet.getId_projet();
+
+        // On remplit les champs texte
+        txtLibelle.setText(projet.getLibelle());
+        txtDescription.setText(projet.getDescription());
+        dpDateDebut.setValue(projet.getDate_debut());
+        dpDateFin.setValue(projet.getDate_fin());
+
+        // Pour la ComboBox, il faut retrouver l'élève correspondant dans la liste
     }
 }

@@ -17,7 +17,9 @@
     <Label text="Liste des Projets Asimov" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button text="Nouveau Projet" onAction="#openCreationWindow"
+        <Button text="Nouveau Projet" onAction="#openCreateWindow"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button text="Editer Projet" fx:id="btnModifier" onAction="#openEditWindow"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
         <Button text="Supprimer sélection" onAction="#deleteProjet"
                 style="-fx-background-color: #ff4444; -fx-text-fill: white;" />
