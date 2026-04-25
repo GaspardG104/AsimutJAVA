@@ -140,24 +140,22 @@ public class ProjetController {
     @FXML
     private void openCreationWindow() {
         try {
-            // Charger le fichier FXML de la fenêtre de création
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/guid/net/asimutjava/projets-create.fxml"));
             Parent root = loader.load();
 
-            // Créer une nouvelle scène et une nouvelle fenêtre (Stage)
+            // On récupère le contrôleur de la fenêtre de création
+            CreateProjetController controller = loader.getController();
+
+            // On lui donne la méthode chargerDonnees comme mission
+            controller.setOnSaveSuccess(this::chargerDonnees);
+
             Stage stage = new Stage();
-            stage.setTitle("Créer un nouveau projet");
             stage.setScene(new Scene(root));
-
-            // Rend la fenêtre modale (bloque la fenêtre principale)
-            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Nouveau Projet");
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Erreur lors de l'ouverture de la fenêtre de création.");
         }
     }
-
 
 }

@@ -68,12 +68,15 @@ public class CreateProjetController {
                     if (response.statusCode() == 201 || response.statusCode() == 200) {
                         System.out.println("Projet créé avec succès !");
 
-                        // 4. On vide les champs et on rafraîchit le tableau
+                        // 4. Utilisation du callback et fermeture de la fenêtre
                         Platform.runLater(() -> {
-                            txtLibelle.clear();
-                            txtDescription.clear();
-                            dpDateDebut.setValue(null);
-                            dpDateFin.setValue(null);
+                            // On exécute la mission de rafraîchissement (chargerDonnees du premier contrôleur)
+                            if (onSaveSuccess != null) {
+                                onSaveSuccess.run();
+                            }
+
+                            // On ferme la fenêtre de création après le succès
+                            cancel();
                         });
                     } else {
                         System.err.println("Erreur lors de la création : " + response.body());
