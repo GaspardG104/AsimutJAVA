@@ -1,16 +1,23 @@
 package guid.net.asimutjava.controllers;
 
+import guid.net.asimutjava.models.Projet;
+import guid.net.asimutjava.models.Eleves;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
-import guid.net.asimutjava.models.Projet;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,6 +27,9 @@ import java.util.List;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import java.time.LocalDate;
+import javafx.application.Platform;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 
 public class ProjetController {
@@ -31,6 +41,11 @@ public class ProjetController {
     @FXML private TableColumn<Projet, String> colResponsable;
     @FXML private TableColumn<Projet, String> colDatedebut;
     @FXML private TableColumn<Projet, String> colDatefin;
+    @FXML private TextField txtLibelle;
+    @FXML private TextArea txtDescription;
+    @FXML private DatePicker dpDateDebut;
+    @FXML private DatePicker dpDateFin;
+    @FXML private ComboBox<Eleves> nomEleves;
 
     @FXML
     public void initialize() {
@@ -55,7 +70,7 @@ public class ProjetController {
     private void chargerDonnees() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/projets/api/json"))
+                .uri(URI.create("http://localhost:3000/projets/api/projets"))
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -86,4 +101,63 @@ public class ProjetController {
                     return null;
                 });
     }
+
+    @FXML
+    private void deleteProjet() {
+        // 1. Récupérer le projet sélectionné
+        Projet selectedProjet = tableProjets.getSelectionModel().getSelectedItem();
+
+        if (selectedProjet == null) {
+            System.out.println("Veuillez sélectionner un projet dans le tableau.");
+            return;
+        }
+
+        // 2. Envoyer la requête de suppression à Node.js
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/projets/api/projets/" + selectedProjet.getId_projet()))
+                .DELETE() // Verbe HTTP DELETE
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenAccept(response -> {
+                    if (response.statusCode() == 200) {
+                        System.out.println("Suppression réussie !");
+                        // 3. Rafraîchir le tableau sur le thread UI
+                        javafx.application.Platform.runLater(this::chargerDonnees);
+                    } else {
+                        System.err.println("Erreur serveur : " + response.body());
+                    }
+                })
+                .exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return null;
+                });
+    }
+
+
+
+    @FXML
+    private void openCreationWindow() {
+        try {
+            // Charger le fichier FXML de la fenêtre de création
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/guid/net/asimutjava/projets-create.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène et une nouvelle fenêtre (Stage)
+            Stage stage = new Stage();
+            stage.setTitle("Créer un nouveau projet");
+            stage.setScene(new Scene(root));
+
+            // Rend la fenêtre modale (bloque la fenêtre principale)
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Erreur lors de l'ouverture de la fenêtre de création.");
+        }
+    }
+
+
 }

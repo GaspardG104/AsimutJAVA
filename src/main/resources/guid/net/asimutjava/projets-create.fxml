@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="guid.net.asimutjava.controllers.CreateProjetController">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Ajouter un nouveau projet" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtLibelle" promptText="Nom du projet" />
+    <ComboBox fx:id="nomEleves" promptText="Choisir un responsable" />
+    <TextArea fx:id="txtDescription" promptText="Description détaillée" prefHeight="100"/>
+    <DatePicker fx:id="dpDateDebut" promptText="Date de début" maxWidth="Infinity"/>
+    <DatePicker fx:id="dpDateFin" promptText="Date de fin" maxWidth="Infinity"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Annuler" onAction="#cancel" />
+        <Button text="Enregistrer" onAction="#createProjet"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+    </HBox>
+</VBox>

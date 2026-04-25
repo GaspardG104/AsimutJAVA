@@ -3,6 +3,7 @@ module guid.net.asimutjava {
     requires javafx.fxml;
     requires com.google.gson;
     requires java.net.http;
+    requires java.desktop;
 
     opens guid.net.asimutjava to javafx.fxml, com.google.gson;
     exports guid.net.asimutjava;
