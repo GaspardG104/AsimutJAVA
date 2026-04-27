@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="guid.net.asimutjava.controllers.ProjetController">
@@ -13,6 +15,15 @@
     </padding>
 
     <Label text="Liste des Projets Asimov" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Nouveau Projet" onAction="#openCreateWindow"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button text="Editer Projet" fx:id="btnModifier" onAction="#openEditWindow"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button text="Supprimer sélection" onAction="#deleteProjet"
+                style="-fx-background-color: #ff4444; -fx-text-fill: white;" />
+    </HBox>
 
     <TableView fx:id="tableProjets" prefHeight="400.0" prefWidth="600.0">
         <columns>

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="guid.net.asimutjava.controllers.ProjetController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+      fx:controller="guid.net.asimutjava.controllers.StageController">
+    <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/></padding>
 
-    <Label text="Liste des Projets Asimov" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Label text="Gestion des Stages" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <TableView fx:id="tableProjets" prefHeight="400.0" prefWidth="600.0">
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Nouveau Stage" onAction="#openCreationWindow" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button fx:id="btnModifier" text="Modifier" onAction="#openEditWindow" style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
+        <Button text="Supprimer" onAction="#deleteStage" style="-fx-background-color: #ff4444; -fx-text-fill: white;" />
+    </HBox>
+
+    <TableView fx:id="tableStages" prefHeight="400.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="colEleve" prefWidth="150.0" text="Nom de l'élève" />
-            <TableColumn fx:id="colEntreprise" prefWidth="250.0" text="Entreprise" />
-            <TableColumn fx:id="colIntensite" prefWidth="150.0" text="Intensité" />
-            <TableColumn fx:id="colConvention" prefWidth="150.0" text="Convention" />
+            <TableColumn fx:id="colLibelle" prefWidth="150.0" text="Libellé" />
+            <TableColumn fx:id="colEntreprise" prefWidth="150.0" text="Entreprise" />
+            <TableColumn fx:id="colDateDebut" prefWidth="100.0" text="Début" />
+            <TableColumn fx:id="colDateFin" prefWidth="100.0" text="Fin" />
         </columns>
     </TableView>
 </VBox>
