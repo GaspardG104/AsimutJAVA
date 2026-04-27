@@ -66,7 +66,7 @@ public class CreateProjetController {
         String jsonBody = gson.toJson(nouveauProjet);
 
         // On définit l'URL de base
-        String url = "http://localhost:3000/projets/api/projets";
+        String url = "http://localhost:3000/api/projets";
         String methode;
 
         if (idProjetSelected  == -1) {

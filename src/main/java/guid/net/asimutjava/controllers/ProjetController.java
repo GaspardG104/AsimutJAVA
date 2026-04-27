@@ -70,7 +70,7 @@ public class ProjetController {
     private void chargerDonnees() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/projets/api/projets"))
+                .uri(URI.create("http://localhost:3000/api/projets/view"))
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -115,7 +115,7 @@ public class ProjetController {
         // 2. Envoyer la requête de suppression à Node.js
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/projets/api/projets/" + selectedProjet.getId_projet()))
+                .uri(URI.create("http://localhost:3000/api/projets" + selectedProjet.getId_projet()))
                 .DELETE() // Verbe HTTP DELETE
                 .build();
 
