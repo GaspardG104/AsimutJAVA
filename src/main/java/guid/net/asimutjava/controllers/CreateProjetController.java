@@ -71,10 +71,11 @@ public class CreateProjetController {
 
         if (idProjetSelected  == -1) {
             // Cas Création
+            url += "/create";
             methode = "POST";
         } else {
             // Cas Modification : on ajoute l'ID à l'URL
-            url += "/" + idProjetSelected ;
+            url += "/" + idProjetSelected;
             methode = "PUT";
         }
 
@@ -121,7 +122,7 @@ public class CreateProjetController {
     private void chargerEleves() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/projets/api/eleves"))
+                .uri(URI.create("http://localhost:3000/api/projets/eleves"))
                 .build();
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
