@@ -35,6 +35,12 @@ public class HomeController {
         chargerPage("stages-view.fxml");
     }
 
+
+    @FXML
+    private void afficherUsers() {
+        chargerPage("users-view.fxml");
+    }
+
     private void chargerPage(String fxmlFile) {
         try {
             // Chargement du nouveau fichier FXML

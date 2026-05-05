@@ -24,6 +24,7 @@
                 <Button mnemonicParsing="false" onAction="#afficherAccueil" style="-fx-background-color: transparent;" text="Accueil" textFill="WHITE" />
                 <Button mnemonicParsing="false" onAction="#afficherProjets" style="-fx-background-color: transparent;" text="Gestion des Projets" textFill="WHITE" />
                 <Button mnemonicParsing="false" onAction="#afficherStages" style="-fx-background-color: transparent;" text="Gestion des Stages" textFill="WHITE" />
+                <Button mnemonicParsing="false" onAction="#afficherUsers" style="-fx-background-color: transparent;" text="Gestion des Utilisateurs" textFill="WHITE" />
             </children>
         </HBox>
     </top>
